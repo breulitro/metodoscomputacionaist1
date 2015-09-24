@@ -1,0 +1,166 @@
+\documentclass[11pt]{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage[section]{placeins}
+\usepackage{graphicx}
+\usepackage{float}
+%\usepackage[a4paper,margin=1cm,footskip=.5cm]{geometry}
+\usepackage{a4wide}
+\usepackage{titlesec}
+%\usepackage{changepage}
+%\setcounter{secnumdepth}{4}
+%\setcounter{tocdepth}{4}
+\usepackage{amssymb}
+
+\usepackage{natbib}
+\usepackage[breaklinks,hidelinks]{hyperref}
+
+\author{
+	Benito Michelon \\
+	Fábio Galvão Rehm \\
+	profa. Beatriz Regina Tavares Franciosi \\
+}
+
+\title {Métodos Computacionais - T1}
+\begin{document}
+\maketitle
+\newpage
+
+\section{Introdução}
+O objetivo deste trabalho é ampliar a visão da disciplina pela transdisciplinaridade, executando algorítmos numéricos e comparando sua
+ordem de convergência. Para tal, devemos calcular por algum método iterativo as constantes irracionais: Número de Ouro, Euler, $e^x$, $\pi$ e algum outro número irracional. Para o outro número irracional, escolhemos $\sqrt{2}$
+\section{Cálculos Interativos}
+\subsection{Número de Ouro}
+\subsubsection{Forma Iterativa}
+Erro = 0.0001 \\
+$\phi_{0} = 1$ \\
+$\phi_{1} = 1 + \frac{1}{\phi_{0}} = 2$ \\
+$\phi_{2} = 1 + \frac{1}{\phi_{1}} = 1.5$ \\
+$\phi_{3} = 1 + \frac{1}{\phi_{2}} = 1.6666...$ \\
+$\phi_{4} = 1 + \frac{1}{\phi_{3}} = 1.6$ \\
+$\phi_{5} = 1 + \frac{1}{\phi_{4}} = 1.625$ \\
+$\phi_{6} = 1 + \frac{1}{\phi_{5}} = 1.615384615$ \\
+$\phi_{7} = 1 + \frac{1}{\phi_{6}} = 1.619047619$ \\
+$\phi_{8} = 1 + \frac{1}{\phi_{7}} = 1.617647059$ \\
+$\phi_{9} = 1 + \frac{1}{\phi_{8}} = 1.618181818$ \\
+$\phi_{10} = 1 + \frac{1}{\phi_{9}} = 1.617977528$ \\
+$\phi_{11} = 1 + \frac{1}{\phi_{10}} = 1.618055556$ \\
+$\phi_{12} = 1 + \frac{1}{\phi_{11}} = 1.618025751$ \\
+
+Pela forma iterativa, foram preciso 12 iterações para obter 4 dígitos significativos. \\
+
+\subsubsection{Método Iterativo N-R}
+Para calcular o número de ouro pelo método de Newton-Raphson é utilizada a seguintes fórmulas: \\
+$f(x) = x^2 - x - 1 = 0$ \\
+$f'(x) = 2x - 1$\\
+$x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}$ \\
+Utilizaremos como erro o valor 0.0001 e $x_0 = 1.2$ (conforme utilizado no artigo sobre o número de ouro). \\
+$x_1 = x_0 - \frac{-0.76}{1.4} = 1.742857143$ \\
+\\
+$x_2 = x_1 - \frac{0.294693877}{2.485714286} = 1.624302135$ \\
+\\
+$x_3 = x_2 - \frac{0.01405529}{2.24860427} = 1.618051462$ \\
+\\
+$x_4 = x_3 - \frac{0.00003907168}{2.236102924} = 1.618033989$ \\
+\\
+
+Constatamos que o método de Newton-Raphson tem uma ordem de convergência maior que a forma iterativa utilizada anteriormente.
+O número de iterações necessárias para a convergência caiu de 10 para 4. \\
+
+\subsubsection{Frações continuadas}\label{sec:fraccont}
+Erro = 0.0001 \\
+$1 + \frac{1}{1} = 2$ \\
+$1 + \frac{1}{1 + \frac{1}{1}} = 1,5$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}} = 1,666$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}} = 1,6$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}} = 1,625$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}} = 1.615384615$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}}} = 1.619047619$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}}}} = 1.617647059$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}}}}} = 1.618181818$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}}}}}} = 1.617977528$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}}}}}}} = 1.618055556$ \\
+$1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1}}}}}}}}}}}} = 1.618025751$ \\
+
+Pelo método das frações continuadas a ordem de convergência é menor que a da primeira tentativa de obter o número de ouro: 12 iterações
+foram necessárias para obtermos 4 dígitos significativos. \\
+\subsection{Constante de Euler}\label{sec:euler}
+O número de Euler pode ser obtido utilizando a série de Taylor para $e^x$ quando x = 1 \cite{euler}.\\
+Ou seja: $$e = \sum_{n=1}^{\infty} \frac{1}{n!}$$
+Erro = 0.0001 \\
+$e_0 = \frac{1}{0!} = 1$\\
+$e_1 = e_0 + \frac{1}{1!} = 2$\\
+$e_2 = e_1 + \frac{1}{2!} = 2.5$\\
+$e_3 = e_2 + \frac{1}{3!} = 2.666$\\
+$e_4 = e_3 + \frac{1}{4!} = 2.70832666$\\
+$e_5 = e_4 + \frac{1}{5!} = 2.71665999993$\\
+$e_6 = e_5 + \frac{1}{6!} = 2.71804888882$\\
+$e_7 = e_6 + \frac{1}{7!} = 2.71824730152$\\
+
+Foram necessárias 8 iterações para que 4 digitos convergissem. \\
+
+\subsection{$e^x$}
+Para calcularmos o valor de $e^x$ precisamos primeiro fixar um valor para x. Se tivermos um x = 1 então é suficiente utilizar o método
+descrito em \ref{sec:euler} para o cálculo de $e^x$.
+
+\subsection{$\pi$}
+O valor de $\pi$ pode ser obtido, de modo iterativo, por duas séries. A série de Gregory-Leibniz e a série de Nilakantha. \cite{pi}
+\subsubsection{Gregory-Leibniz}
+Erro = 0.001 ou iterações <= 23\\
+$\pi_0 = \frac{4}{1} = 4$\\
+$\pi_1 = \pi_0 - \frac{4}{3} = 2.6666$\\
+$\pi_2 = \pi_1 + \frac{4}{5} = 3.46666$\\
+$\pi_3 = \pi_2 - \frac{4}{7} = 2.89523142857$\\
+$\pi_4 = \pi_3 + \frac{4}{9} = 3.33967587302$\\
+$\pi_5 = \pi_4 - \frac{4}{11} = 2.97603950938$\\
+$\pi_6 = \pi_5 + \frac{4}{13} = 3.28373181707$\\
+$\pi_7 = \pi_6 - \frac{4}{15} = 3.01706515041$\\
+$\pi_8 = \pi_7 + \frac{4}{17} = 3.25235926805$\\
+$\pi_9 = \pi_8 - \frac{4}{19} = 3.04183295226$\\
+$\pi_{10} = \pi_9 + \frac{4}{21} = 3.23230914274$\\
+$\pi_{11} = \pi_{10} - \frac{4}{23} = 3.05839609926$\\
+$\pi_{12} = \pi_{11} + \frac{4}{25} = 3.21839609926$\\
+$\pi_{13} = \pi_{12} - \frac{4}{27} = 3.07024795111$\\
+$\pi_{14} = \pi_{13} + \frac{4}{29} = 3.2081789856$\\
+$\pi_{15} = \pi_{14} - \frac{4}{31} = 3.07914672753$\\
+$\pi_{16} = \pi_{15} + \frac{4}{33} = 3.20035884874$\\
+$\pi_{17} = \pi_{16} - \frac{4}{35} = 3.08607313446$\\
+$\pi_{18} = \pi_{17} + \frac{4}{37} = 3.19418124257$\\
+$\pi_{19} = \pi_{18} - \frac{4}{39} = 3.09161714$\\
+$\pi_{20} = \pi_{19} + \frac{4}{41} = 3.18917811561$\\
+$\pi_{21} = \pi_{20} - \frac{4}{43} = 3.0961548598$\\
+$\pi_{22} = \pi_{21} + \frac{4}{45} = 3.18504374869$\\
+
+\subsubsection{Nilakantha}
+Erro = 0.001\\
+$\pi_0 = 3$\\
+$\pi_1 = \pi_0 + \frac{4}{2*3*4} = 3.1666666666$\\
+$\pi_2 = \pi_1 - \frac{4}{4*5*6} = 3.13333333333$\\
+$\pi_3 = \pi_2 + \frac{4}{6*7*8} = 3.14523809524$\\
+$\pi_4 = \pi_3 - \frac{4}{8*9*10} = 3.13968253968$\\
+$\pi_5 = \pi_4 + \frac{4}{10*11*12} = 3.14271284271$\\
+$\pi_6 = \pi_5 - \frac{4}{12*13*14} = 3.14088134088$\\
+
+Como podemos notar, o série de Gregory-Leibniz convergiu apenas um dígito e parou pelo número de iterações.
+Já a série de Nilakantha convergiu 3 dígitos em apenas 6 iterações.
+\subsection{$\sqrt{2}$}
+Para o cálculo da raiz quadrada de um número n, no nosso caso 2, utilizaremos o método desenvolvido por Herão de Alexandria \cite{herao}.
+O método consiste em atribuir um número $a_0$ como aproximação inicial e ir aproiximando a raiz de n pela fórmula:
+$$a_k = \frac{a_{k-1} + \frac{n}{a_{k-1}}}{2}$$ \\
+Erro = 0.000001\\
+$a_0 = 1$
+$a_1 = \frac{a_0 + \frac{2}{a_0}}{2} = 1.5$\\
+$a_2 = \frac{a_1 + \frac{2}{a_1}}{2} = 1.41666$\\
+$a_3 = \frac{a_2 + \frac{2}{a_2}}{2} = 1.414215686$\\
+$a_4 = \frac{a_3 + \frac{2}{a_3}}{2} = 1.414213562$\\
+
+Com apenas 4 iterações, o método de Herão convergiu para 6 dígitos significativos. Claro que a escolha do valor de $a_0$ agilizou este processo, mas mesmo assim, a ordem de convergência do método é alta.
+
+\section{Conclusão}
+Aprendemos com este trabalho que as diferenças entre dois métodos se dá pelo custo computacional(número de cálculos) e ordem de convergência(número de dígitos significativos obtidos a cada iteração). Vimos também que o custo computacional não influencia a ordem de convergência, vide seção \ref{sec:fraccont}.
+\bibliographystyle{plain}
+\bibliography{t1}
+\end{document}
